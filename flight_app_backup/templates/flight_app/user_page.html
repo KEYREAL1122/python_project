@@ -1,0 +1,25 @@
+{% extends 'flight_app/base_generic.html' %}
+
+{% block content %}
+  <h2>Welcome, {{ user.username }}!</h2>
+  
+  <h3>All Flights:</h3>
+  {% if flights %}
+    <div class="row">
+      {% for flight in flights %}
+        {% url "book-flight" flight.id as flight_url %}
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h4 class="card-title">{{ flight.name }}</h4>
+              <p class="card-text">{{ flight.description }}</p>
+              <a href="{{ flight_url }}" class="btn btn-primary">Book this flight</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No flights available.</p>
+  {% endif %}
+{% endblock %}
