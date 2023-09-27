@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tickets</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Tickets</h1>
+    </header>
+    
+    <nav class="navbar">
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'flight-list' %}">Flights</a></li>
+        <li><a href="{% url 'ticket-list' %}">Tickets</a></li>
+        <!-- Add more navigation links as needed -->
+      </ul>
+    </nav>
+    
+    <div class="content">
+      <h2>Your Tickets</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Ticket Number</th>
+            <th>Flight</th>
+            <th>Customer</th>
+            <th>Departure Time</th>
+            <th>Landing Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ticket in tickets %}
+          <tr>
+            <td>{{ ticket.ticket_number }}</td>
+            <td>{{ ticket.flight.flight_number }}</td>
+            <td>{{ ticket.customer.name }}</td>
+            <td>{{ ticket.flight.departure_time }}</td>
+            <td>{{ ticket.flight.landing_time }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    
+    <footer class="footer">
+      &copy; 2023 My Flight App. All rights reserved.
+    </footer>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

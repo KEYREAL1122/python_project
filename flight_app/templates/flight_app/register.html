@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    <!-- Include Bootstrap CSS from a CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2>Register</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" value="{{ form.username.value|default_if_none:'' }}" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ form.email.value|default_if_none:'' }}" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Confirm Password:</label>
+                        <input type="password" id="password2" name="password2" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                    {% if errors %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for field, error in errors.items %}
+                                    <li><strong>{{ field }}:</strong> {{ error|join:", " }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
